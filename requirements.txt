@@ -1,0 +1,5 @@
+flask==2.2.3
+flask-session==0.4.0
+flask-SQLAlchemy==3.0.3
+psycopg2-binary==2.9.6
+flask-Bcrypt==1.0.1
