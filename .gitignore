@@ -2,3 +2,8 @@
 flask_session
 cert.pem
 key.pem
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/modules.xml
+.idea/projekt-flask-uczelnia.iml
+.idea/workspace.xml
