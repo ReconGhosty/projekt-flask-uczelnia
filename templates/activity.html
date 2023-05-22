@@ -1,0 +1,51 @@
+{% extends "lay.html" %} {% block content %}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">Logowania użytkowników</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active"></li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                </div>
+                <div class="card-body">
+
+                    <table id="datatablesSimple">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>IMIE</th>
+                                <th>NAZWISKO</th>
+                                <th>DATA</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>IMIE</th>
+                                <th>NAZWISKO</th>
+                                <th>DATA</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+
+                            {% for log in logins %}
+
+                            <tr>
+                                <td>{{ log.id }}</td>
+                                <td>{{ log.imie }}</td>
+                                <td>{{ log.nazwisko }}</td>
+                                <td>{{ log.data }}</td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    {% endblock %}

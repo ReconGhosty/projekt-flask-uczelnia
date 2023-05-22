@@ -1,0 +1,80 @@
+{% extends "lay.html" %} {% block content %}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">Dashboard</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i> DataTable Example
+                </div>
+                <div class="card-body">
+
+                    <table id="datatablesSimple">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>IMIE</th>
+                                <th>NAZWISKO</th>
+                                <th>EMAIL</th>
+                                <th>PASSWORD</th>
+                                <th>AKCJA</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>IMIE</th>
+                                <th>NAZWISKO</th>
+                                <th>EMAIL</th>
+                                <th>PASSWORD</th>
+                                <th>AKCJA</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+
+
+                            {% for user in users %}
+                            <tr>
+
+                                <td>{{ user.id }}
+                                    <form id={{ user.id }} method="POST" action="{{ url_for('edit_user', user_id=user.id) }}">
+                                </td>
+                                <td><input form={{ user.id }} id="imie_{{ user.id }}" type="text" name="imie" value="{{ user.imie }}" oninput="blockPolishChars(event)" readonly>{{ user.imie }} </td>
+                                <td><input form={{ user.id }} id="nazwisko_{{ user.id }}" type="text" name="nazwisko" value="{{ user.nazwisko }}" oninput="blockPolishChars(event)" readonly>{{ user.nazwisko }}</td>
+                                <td><input form={{ user.id }} id="email_{{ user.id }}" type="text" name="email" value="{{ user.email }}" oninput="blockPolishChars(event)" readonly>{{ user.email }}</td>
+                                <td><input form={{ user.id }} id="password_{{ user.id }}" type="password" name="password" placeholder="Nowe hasło" oninput="blockPolishChars(event)" readonly></td>
+                                <td><input class="btn btn-primary" form={{ user.id }} type="submit" value="Save">
+                                    <a href="{{url_for('delete_user', user_id=user.id)}}" class="btn btn-danger">Delete</a>
+                                    <button onclick="enableEdit('{{ user.id }}')" class="btn btn-warning">Edytuj</button>
+                                </td>
+                                </form>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <script>
+                        function enableEdit(userId) {
+                            document.getElementById('imie_' + userId).readOnly = false;
+                            document.getElementById('nazwisko_' + userId).readOnly = false;
+                            document.getElementById('email_' + userId).readOnly = false;
+                            document.getElementById('password_' + userId).readOnly = false;
+                        }
+
+                        function blockPolishChars(event) {
+                            const inputValue = event.target.value;
+                            const regex = /[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/g;
+
+                            if (regex.test(inputValue)) {
+                                event.target.value = inputValue.replace(regex, '');
+                            }
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </main>
+    {% endblock %}

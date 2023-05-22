@@ -1,0 +1,62 @@
+{% extends "lay.html" %}
+
+    {% block content %}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+                    <h1 class="mt-4">Dashboard</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i> DataTable Example
+                        </div>
+                        <div class="card-body">
+
+                            <table id="datatablesSimple">
+                                <thead>
+                                    <tr>
+
+                                        <th>IMIE</th>
+                                        <th>NAZWISKO</th>
+                                        <th>EMAIL</th>
+
+                                    </tr>
+                                </thead>
+    <tfoot>
+                                    <tr>
+                                        <th>IMIE</th>
+                                        <th>NAZWISKO</th>
+                                        <th>EMAIL</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+
+      {% for user in users %}
+      <tr>
+      <form method="POST" action="{{ url_for('edit_user', user_id=user.id) }}">
+<td>
+
+        <input type="text" id="imie" name="imie" value="{{ user.imie }}" required></td>
+<td>
+
+        <input type="text" id="nazwisko" name="nazwisko" value="{{ user.nazwisko }}" required></td>
+<td>
+
+        <input type="email" id="email" name="email" value="{{ user.email }}" required></td>
+
+     <td>   <input type="submit" value="Zapisz zmiany" href="{{ url_for('users') }}"></td>
+    </form>
+                                    </tr>
+      {% endfor %}
+
+</tbody>
+
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+{% endblock %}

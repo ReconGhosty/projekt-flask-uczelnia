@@ -1,0 +1,70 @@
+{% extends "lay.html" %}
+
+    {% block content %}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+                    <h1 class="mt-4">Dashboard</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i> DataTable Example
+                        </div>
+                        <div class="card-body">
+
+                            <table id="datatablesSimple">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>IMIE</th>
+                                        <th>NAZWISKO</th>
+                                        <th>EMAIL</th>
+                                        <th>LOGIN</th>
+                                        <th>AKCJA</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>IMIE</th>
+                                        <th>NAZWISKO</th>
+                                        <th>EMAIL</th>
+                                        <th>LOGIN</th>
+                                        <th width="auto">AKCJA</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+
+                                    {% for user in users %}
+
+                                <tr>
+                                    <td>{{ user.id }}</td>
+                                    <td>{{ user.imie }}</td>
+                                    <td>{{ user.nazwisko }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.login }}</td>
+<!--                                    <td><button type="button" class="btn btn-warning">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>-->
+                                        <td><input type="text" id="userInput" value="{{ user.login }}" readonly>
+<button id="editButton" onclick="enableEdit()">Edytuj</button>
+
+<script>
+function enableEdit() {
+  var userInput = document.getElementById("userInput");
+  userInput.readOnly = false;
+  userInput.focus();
+}
+</script></td>
+
+                                </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+{% endblock %}
