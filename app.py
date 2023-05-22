@@ -1,5 +1,6 @@
 # import base64
 # from io import BytesIO
+import os
 
 from flask import Flask, request, session, redirect, url_for, \
     render_template, flash, jsonify
@@ -14,6 +15,8 @@ from flask_bcrypt import Bcrypt
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, join, func
 # import matplotlib.pyplot as plt
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -24,12 +27,9 @@ start_time = time.time()
 #     print(uptime_str)n
 #     time.sleep(1)
 
-
-
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:docker@192.168.48.132:5431/postgres'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:docker@192.168.48.132:5431/pyth'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://python:vKmpgzdISLFuVw19jrAXhmd7lgyTMnUn@dpg-chlhfl3hp8uej75mh7kg-a.frankfurt-postgres.render.com/pyth_tn78'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://python:vKmpgzdISLFuVw19jrAXhmd7lgyTMnUn@dpg-chlhfl3hp8uej75mh7kg-a/pyth_tn78'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+# app.config['SESSION_FILE_DIR'] = './flask_session'
+# app.config['SESSION_FILE_MODE'] = '0777'
 app.config['SESSION_TYPE'] = 'filesystem'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
