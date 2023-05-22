@@ -7,3 +7,4 @@ key.pem
 .idea/modules.xml
 .idea/projekt-flask-uczelnia.iml
 .idea/workspace.xml
+*.pyc
