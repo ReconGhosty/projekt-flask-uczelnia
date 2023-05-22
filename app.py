@@ -21,7 +21,7 @@ start_time = time.time()
 # while True:
 #     projekt-flask-uczelnia = time.time() - start_time
 #     uptime_str = time.strftime("%H:%M:%S", time.gmtime(projekt-flask-uczelnia))
-#     print(uptime_str)
+#     print(uptime_str)n
 #     time.sleep(1)
 
 
