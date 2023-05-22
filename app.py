@@ -28,8 +28,8 @@ start_time = time.time()
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:docker@192.168.48.132:5431/postgres'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:docker@192.168.48.132:5431/pyth'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://python:vKmpgzdISLFuVw19jrAXhmd7lgyTMnUn@dpg-chlhfl3hp8uej75mh7kg-a.frankfurt-postgres.render.com/pyth_tn78'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://python:vKmpgzdISLFuVw19jrAXhmd7lgyTMnUn@dpg-chlhfl3hp8uej75mh7kg-a/pyth_tn78'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://python:vKmpgzdISLFuVw19jrAXhmd7lgyTMnUn@dpg-chlhfl3hp8uej75mh7kg-a.frankfurt-postgres.render.com/pyth_tn78'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://python:vKmpgzdISLFuVw19jrAXhmd7lgyTMnUn@dpg-chlhfl3hp8uej75mh7kg-a/pyth_tn78'
 app.config['SESSION_TYPE'] = 'filesystem'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
