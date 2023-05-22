@@ -222,4 +222,6 @@ def delete_user(user_id):
 if __name__ == "__main__":
     app.secret_key = 'test'
     app.permanent_session_lifetime = timedelta(minutes=10)
-    app.run(port=443, host='0.0.0.0', ssl_context=('cert.pem', 'key.pem'),debug=True)
+    # app.run(port=443, host='0.0.0.0', ssl_context=('cert.pem', 'key.pem'),debug=True)
+    app.run()
+
