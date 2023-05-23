@@ -37,42 +37,61 @@
 
 
                             {% for user in users %}
-                            <tr>
+    <tr>
+        <td>{{ user.id }}
+            <form id="{{ user.id }}" method="POST" action="{{ url_for('edit_user', user_id=user.id) }}">
+        </td>
+        <td><input form="{{ user.id }}" id="imie_{{ user.id }}" type="text" name="imie" value="{{ user.imie }}" oninput="blockPolishChars(event)" readonly>{{ user.imie }} </td>
+        <td><input form="{{ user.id }}" id="nazwisko_{{ user.id }}" type="text" name="nazwisko" value="{{ user.nazwisko }}" oninput="blockPolishChars(event)" readonly>{{ user.nazwisko }}</td>
+        <td><input form="{{ user.id }}" id="email_{{ user.id }}" type="text" name="email" value="{{ user.email }}" oninput="blockPolishChars(event)" readonly>{{ user.email }}</td>
+        <td><input form="{{ user.id }}" id="password_{{ user.id }}" type="password" name="password" placeholder="Nowe hasło" oninput="blockPolishChars(event)" readonly></td>
+        <td>
+            <input class="btn btn-primary" form="{{ user.id }}" type="submit" value="Save">
+            <a href="#" class="btn btn-danger" onclick="confirmDelete('{{ url_for('delete_user', user_id=user.id) }}')">Delete</a>
+            <button onclick="enableEdit('{{ user.id }}')" class="btn btn-warning">Edytuj</button>
+        </td>
+        </form>
+    </tr>
+{% endfor %}
 
-                                <td>{{ user.id }}
-                                    <form id={{ user.id }} method="POST" action="{{ url_for('edit_user', user_id=user.id) }}">
-                                </td>
-                                <td><input form={{ user.id }} id="imie_{{ user.id }}" type="text" name="imie" value="{{ user.imie }}" oninput="blockPolishChars(event)" readonly>{{ user.imie }} </td>
-                                <td><input form={{ user.id }} id="nazwisko_{{ user.id }}" type="text" name="nazwisko" value="{{ user.nazwisko }}" oninput="blockPolishChars(event)" readonly>{{ user.nazwisko }}</td>
-                                <td><input form={{ user.id }} id="email_{{ user.id }}" type="text" name="email" value="{{ user.email }}" oninput="blockPolishChars(event)" readonly>{{ user.email }}</td>
-                                <td><input form={{ user.id }} id="password_{{ user.id }}" type="password" name="password" placeholder="Nowe hasło" oninput="blockPolishChars(event)" readonly></td>
-                                <td><input class="btn btn-primary" form={{ user.id }} type="submit" value="Save">
-                                    <a href="{{url_for('delete_user', user_id=user.id)}}" class="btn btn-danger">Delete</a>
-                                    <button onclick="enableEdit('{{ user.id }}')" class="btn btn-warning">Edytuj</button>
-                                </td>
-                                </form>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+<!-- Dodaj link do biblioteki SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5"></script>
 
-                    <script>
-                        function enableEdit(userId) {
-                            document.getElementById('imie_' + userId).readOnly = false;
-                            document.getElementById('nazwisko_' + userId).readOnly = false;
-                            document.getElementById('email_' + userId).readOnly = false;
-                            document.getElementById('password_' + userId).readOnly = false;
-                        }
+<script>
+    function enableEdit(userId) {
+        document.getElementById('imie_' + userId).readOnly = false;
+        document.getElementById('nazwisko_' + userId).readOnly = false;
+        document.getElementById('email_' + userId).readOnly = false;
+        document.getElementById('password_' + userId).readOnly = false;
+    }
 
-                        function blockPolishChars(event) {
-                            const inputValue = event.target.value;
-                            const regex = /[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/g;
+    function blockPolishChars(event) {
+        const inputValue = event.target.value;
+        const regex = /[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/g;
 
-                            if (regex.test(inputValue)) {
-                                event.target.value = inputValue.replace(regex, '');
-                            }
-                        }
-                    </script>
+        if (regex.test(inputValue)) {
+            event.target.value = inputValue.replace(regex, '');
+        }
+    }
+
+    function confirmDelete(url) {
+        Swal.fire({
+            title: 'Czy na pewno chcesz usunąć?',
+            text: "Tej operacji nie można cofnąć!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Usuń',
+            cancelButtonText: 'Anuluj'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Kontynuuj usuwanie
+                window.location.href = url;
+            }
+        });
+    }
+</script>
                 </div>
             </div>
         </div>

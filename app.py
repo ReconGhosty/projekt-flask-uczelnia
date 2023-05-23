@@ -71,7 +71,7 @@ def index():
     if not session.get('logged_in'):
         return redirect(url_for('login'))
     else:
-        users = User.query.all()
+        users = User.query.order_by(User.id).all()
         return render_template('index.html', users=users, imie=session['imie'], nazwisko=session['nazwisko'])
 
 @app.route('/login', methods=['GET', 'POST'])
