@@ -166,27 +166,32 @@ def users():
 
 @app.route('/edit_user/<int:user_id>', methods=['GET', 'POST'])
 def edit_user(user_id):
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    else:
 
-
-    if request.method == 'POST':
-        user = User.query.get(user_id)
-        user.imie = request.form['imie']
-        user.nazwisko = request.form['nazwisko']
-        user.email = request.form['email']
-        password = request.form['password']
-        if password == '':
-            pass
-        else:
-            user.haslo = bcrypt.generate_password_hash(password).decode("utf-8")
-        db.session.commit()
-        return redirect('/users')
+        if request.method == 'POST':
+            user = User.query.get(user_id)
+            user.imie = request.form['imie']
+            user.nazwisko = request.form['nazwisko']
+            user.email = request.form['email']
+            password = request.form['password']
+            if password == '':
+                pass
+            else:
+                user.haslo = bcrypt.generate_password_hash(password).decode("utf-8")
+            db.session.commit()
+            return redirect('/users')
 
 @app.route('/delete_user/<int:user_id>', methods=['GET', 'POST'])
 def delete_user(user_id):
-    user = User.query.get(user_id)
-    db.session.delete(user)
-    db.session.commit()
-    return redirect('/users')
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    else:
+        user = User.query.get(user_id)
+        db.session.delete(user)
+        db.session.commit()
+        return redirect('/users')
 
 # @app.route('/chart')
 # def plot_login_histogram():
